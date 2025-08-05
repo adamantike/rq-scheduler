@@ -229,8 +229,10 @@ The script accepts these arguments:
 * ``-H`` or ``--host``: Redis server to connect to
 * ``-p`` or ``--port``: port to connect to
 * ``-d`` or ``--db``: Redis db to use
+* ``-U`` or ``--username``: username to connect to Redis
 * ``-P`` or ``--password``: password to connect to Redis
 * ``-b`` or ``--burst``: runs in burst mode (enqueue scheduled jobs whose execution time is in the past and quit)
+* ``--ssl``: use SSL to connect to Redis
 * ``-i INTERVAL`` or ``--interval INTERVAL``: How often the scheduler checks for new jobs to add to the queue (in seconds, can be floating-point for more precision).
 * ``-j`` or ``--job-class``: specify custom job class for rq to use (python module.Class)
 * ``-q`` or ``--queue-class``: specify custom queue class for rq to use (python module.Class)

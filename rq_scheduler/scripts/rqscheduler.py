@@ -16,7 +16,9 @@ def main():
     parser.add_argument('-H', '--host', default=os.environ.get('RQ_REDIS_HOST', 'localhost'), help="Redis host")
     parser.add_argument('-p', '--port', default=int(os.environ.get('RQ_REDIS_PORT', 6379)), type=int, help="Redis port number")
     parser.add_argument('-d', '--db', default=int(os.environ.get('RQ_REDIS_DB', 0)), type=int, help="Redis database")
+    parser.add_argument('-U', '--username', default=os.environ.get('RQ_REDIS_USERNAME'), help="Redis username")
     parser.add_argument('-P', '--password', default=os.environ.get('RQ_REDIS_PASSWORD'), help="Redis password")
+    parser.add_argument('--ssl', action='store_true', default=bool(int(os.environ.get('RQ_REDIS_SSL', 0))), help="Use SSL to connect to Redis")
     parser.add_argument('--verbose', '-v', action='store_true', default=False, help='Show more output')
     parser.add_argument('--quiet', action='store_true', default=False, help='Show less output')
     parser.add_argument('--url', '-u', default=os.environ.get('RQ_REDIS_URL')
@@ -44,7 +46,12 @@ def main():
     if args.url is not None:
         connection = Redis.from_url(args.url)
     else:
-        connection = Redis(args.host, args.port, args.db, args.password)
+        connection = Redis(host=args.host,
+                           port=args.port,
+                           db=args.db,
+                           password=args.password,
+                           username=args.username,
+                           ssl=args.ssl)
 
     if args.verbose:
         level = 'DEBUG'
